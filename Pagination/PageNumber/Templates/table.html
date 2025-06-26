@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movies List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .pagination {
+      margin-top: 20px;
+    }
+    .pagination a {
+      margin-right: 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Student List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rating</th>
+      <th>Genre</th>
+      <th>Language</th>
+      <th>Release Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movie in page_obj %}
+    <tr>
+      <td>{{ movie.name }}</td>
+      <td>{{ movie.rating }}</td>
+      <td>{{ movie.genre }}</td>
+      <td>{{ movie.language }}</td>
+      <td>{{ movie.re_year }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="pagination">
+  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span><br><br>
+
+  {% if page_obj.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
+
+</body>
+</html>
